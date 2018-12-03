@@ -1,16 +1,11 @@
+import util.compareAll
+
 fun main(args: Array<String>) {
     findMatches()
 }
 
 private fun findMatches(): Unit {
-    val matches = mutableListOf<String>()
-    for (i in 0 .. (input.size - 2)) {
-        for (j in (i + 1) .. (input.size - 1)) {
-            matches.add(extractMatch(input[i], input[j]))
-        }
-    }
-
-    matches
+    compareAll(input, ::extractMatch)
         .filter { it.length == length - 1 }
         .forEach { println("found match $it") }
 }
@@ -25,7 +20,7 @@ private fun extractMatch(l: String, r:String): String {
     return output
 }
 
-private val input = arrayOf(
+private val input = listOf(
     "xdmgyjkpruszabaqwficevtjeo",
     "xdmgybkgwuszlbaqwfichvtneo",
     "xdmgyjkpruszlbcwwfichvtndo",
