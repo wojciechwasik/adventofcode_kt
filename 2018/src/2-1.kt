@@ -1,3 +1,7 @@
+//
+// checksum is 5658
+//
+
 fun main(args: Array<String>) {
     val result = input.map(::extract).fold(Result(0, 0), ::addPartial)
     println("checksum is ${result.sumTwos * result.sumThrees}")

@@ -1,3 +1,12 @@
+//
+// Strategy 1
+// winner is: 1987, minute with most sleep: 34
+// result: 67558
+// Strategy 2
+// winner is: 2633, minute with most sleep: 30
+// result: 78990
+//
+
 import util.parseInput
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit

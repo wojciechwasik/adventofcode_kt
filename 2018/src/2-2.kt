@@ -1,3 +1,7 @@
+//
+// found match: nmgyjkpruszlbaqwficavxneo
+//
+
 import util.compareAll
 
 fun main(args: Array<String>) {
@@ -7,7 +11,7 @@ fun main(args: Array<String>) {
 private fun findMatches(): Unit {
     compareAll(input, ::extractMatch)
         .filter { it.length == length - 1 }
-        .forEach { println("found match $it") }
+        .forEach { println("found match: $it") }
 }
 
 private fun extractMatch(l: String, r:String): String {

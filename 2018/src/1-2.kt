@@ -1,3 +1,7 @@
+//
+// duplicate found: 709
+//
+
 fun main(args: Array<String>) {
     var sum: Int = 0;
     val freq = mutableSetOf<Int>(0);

@@ -1,3 +1,7 @@
+//
+// 500
+//
+
 fun main(args: Array<String>) {
     val result= input.sumBy { it }
     println(result)

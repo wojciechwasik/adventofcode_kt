@@ -1,3 +1,8 @@
+//
+// overlap size: 110827
+// not overlapped: 116
+//
+
 import util.compareAll
 import util.parseInput
 
