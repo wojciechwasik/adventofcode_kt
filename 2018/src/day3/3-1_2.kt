@@ -1,3 +1,5 @@
+package day3
+
 //
 // overlap size: 110827
 // not overlapped: 116
@@ -30,9 +32,11 @@ private val entryPattern = Regex("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)")
 
 private fun validator(values: List<String>) = values.size == 6
 
-private fun transformer(values: List<String>) = Field(values[1],
+private fun transformer(values: List<String>) = Field(
+    values[1],
     values[2].toInt(), values[3].toInt(),
-    values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1)
+    values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1
+)
 
 private fun toPoints(field: Field): MutableSet<Point> {
     val result = mutableSetOf<Point>()

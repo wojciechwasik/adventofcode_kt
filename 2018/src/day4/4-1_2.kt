@@ -1,3 +1,5 @@
+package day4
+
 //
 // Strategy 1
 // winner is: 1987, minute with most sleep: 34
