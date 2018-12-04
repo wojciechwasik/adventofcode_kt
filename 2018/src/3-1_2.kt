@@ -1,7 +1,8 @@
 import util.compareAll
+import util.parseInput
 
 fun main(args: Array<String>) {
-    val points = input.map { parse(it) }
+    val points = input.map { parseInput(it, entryPattern, ::validator, ::transformer) }
     val overlapped = mutableSetOf<String>()
 
     val xMax = points.maxBy { it.right }?.right
@@ -22,15 +23,11 @@ fun main(args: Array<String>) {
 
 private val entryPattern = Regex("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)")
 
-private fun parse(entry: String): Field {
-    val matches = entryPattern.find(entry)
-    if (matches?.groupValues?.size == 6) {
-        return matches.groupValues.let {
-            Field(it[1], it[2].toInt(), it[3].toInt(), it[2].toInt() + it[4].toInt() - 1, it[3].toInt() + it[5].toInt() - 1)
-        }
-    }
-    throw IllegalArgumentException("not matching: $entry")
-}
+private fun validator(values: List<String>) = values.size == 6
+
+private fun transformer(values: List<String>) = Field(values[1],
+    values[2].toInt(), values[3].toInt(),
+    values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1)
 
 private fun toPoints(field: Field): MutableSet<Point> {
     val result = mutableSetOf<Point>()
