@@ -14,12 +14,12 @@ fun main(args: Array<String>) {
         .mapIndexed { index, entry -> parseInput(entry, Regex("(\\d+), *(\\d+)"), { it.size == 3 }, { Source(index, it[1].toInt(), it[2].toInt()) }) }
 
     // normalize
-    val minX = sources.minBy { it.x } ?.x ?: throw IllegalStateException("This should never happen")
-    val minY = sources.minBy { it.y } ?.y ?: throw IllegalStateException("This should never happen")
+    val minX = sources.minBy { it.x } ?.x ?: abort()
+    val minY = sources.minBy { it.y } ?.y ?: abort()
     val normalized = sources.map { it.transform(-minX, -minY) }
 
-    val maxX = sources.maxBy { it.x } ?.x ?: throw IllegalStateException("This should never happen")
-    val maxY = sources.maxBy { it.y } ?.y ?: throw IllegalStateException("This should never happen")
+    val maxX = sources.maxBy { it.x } ?.x ?: abort()
+    val maxY = sources.maxBy { it.y } ?.y ?: abort()
 
     // init grid with ids of closest sources (-1 means equal distance to 2 or more)
     val grid = MutableList<MutableList<Int>>(maxX + 1) { MutableList<Int>(maxY + 1) { -1 } }
@@ -81,6 +81,8 @@ fun main(args: Array<String>) {
 
     println("limited area is: $limitedArea")
 }
+
+fun abort(): Nothing = throw IllegalStateException("This should never happen")
 
 private data class Source(val id: Int, val x: Int, val y: Int) {
 
