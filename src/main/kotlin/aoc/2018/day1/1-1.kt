@@ -1,12 +1,12 @@
 package aoc.`2018`.day1
 
-import util.inputIntoLines
+import util.InputReader
 
 //
 // 500
 //
 
 fun main(args: Array<String>) {
-    val result= inputIntoLines("src\\day1\\data.txt").sumBy { it.toInt() }
+    val result = InputReader("/day1.txt").readLines().sumBy { it.toInt() }
     println(result)
 }

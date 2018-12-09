@@ -1,15 +1,21 @@
 package aoc.`2018`.day2
 
-import util.inputIntoLines
+import util.InputReader
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Char
+import kotlin.Int
+import kotlin.String
 
 //
 // checksum is 5658
 //
 
 fun main(args: Array<String>) {
-    val result = inputIntoLines("src\\day2\\data.txt")
-        .map(::extract)
-        .fold(Result(0, 0), ::addPartial)
+    val result = InputReader("/day2.txt")
+            .readLines()
+            .map(::extract)
+            .fold(Result(0, 0), ::addPartial)
     println("checksum is ${result.sumTwos * result.sumThrees}")
 }
 

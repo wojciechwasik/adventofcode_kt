@@ -1,7 +1,7 @@
 package aoc.`2018`.day3
 
+import util.InputReader
 import util.compareAll
-import util.inputIntoLines
 import util.parseInput
 
 //
@@ -10,8 +10,9 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val points = inputIntoLines("src\\day3\\data.txt")
-        .map { parseInput(it, entryPattern, ::validator, ::transformer) }
+    val points = InputReader("/day3.txt")
+            .readLines()
+            .map { parseInput(it, entryPattern, ::validator, ::transformer) }
     val overlapped = mutableSetOf<String>()
 
     val xMax = points.maxBy { it.right }?.right

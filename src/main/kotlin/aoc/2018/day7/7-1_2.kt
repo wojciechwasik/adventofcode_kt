@@ -1,6 +1,6 @@
 package aoc.`2018`.day7
 
-import util.inputIntoLines
+import util.InputReader
 import util.parseInput
 
 //
@@ -9,14 +9,15 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val input = inputIntoLines("src\\day7\\data.txt")
-        .map {
-            parseInput(
-                it,
-                Regex("Step (\\w{1}) must be finished before step (\\w{1}) can begin."),
-                { it.size == 3 },
-                { Link(it[1][0], it[2][0]) })
-        }
+    val input = InputReader("/day7.txt")
+            .readLines()
+            .map {
+                parseInput(
+                    it,
+                    Regex("Step (\\w{1}) must be finished before step (\\w{1}) can begin."),
+                    { it.size == 3 },
+                    { Link(it[1][0], it[2][0]) })
+            }
 
     problem1(input)
 

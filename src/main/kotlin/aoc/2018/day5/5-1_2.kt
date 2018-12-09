@@ -1,6 +1,6 @@
 package aoc.`2018`.day5
 
-import util.inputIntoLines
+import util.InputReader
 
 //
 // final lenght: 9900
@@ -8,7 +8,7 @@ import util.inputIntoLines
 //
 
 fun main (args: Array<String>) {
-    val input = inputIntoLines("src\\day5\\data.txt")[0].toCharArray()
+    val input = InputReader("/day5.txt").readLines()[0].toCharArray()
 
     val length = react(input)
     println("final lenght: $length")

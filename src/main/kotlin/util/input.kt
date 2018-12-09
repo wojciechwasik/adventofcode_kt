@@ -5,11 +5,14 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.io.StreamTokenizer
 
-fun inputIntoLines(filename: String) = inputReader(filename).readLines()
+class InputReader(val filename:String) {
 
-fun inputTokenizer(filename: String) = StreamTokenizer(BufferedReader(inputReader(filename)))
+    fun readLines() = getResourceReader().readLines()
 
-private fun inputReader(filename: String) = InputStreamReader(FileInputStream(filename))
+    fun tokenize() = StreamTokenizer(BufferedReader(getResourceReader()))
+
+    private fun getResourceReader() = InputStreamReader(this::class.java.getResourceAsStream(filename))
+}
 
 fun <T> parseInput(entry: String, regex: Regex, validator: (List<String>) -> Boolean, transformer: (List<String>) -> T): T {
     val matches = regex.find(entry)

@@ -1,6 +1,6 @@
 package aoc.`2018`.day4
 
-import util.inputIntoLines
+import util.InputReader
 import util.parseInput
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
@@ -16,10 +16,11 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
     // log entries grouped by date
-    val entries = inputIntoLines("src\\day4\\data.txt")
-        .map { parseInput(it, entryPattern, ::validator, ::transformer) }
-        .sortedBy { it.dateTime }
-        .groupBy { it.dateTime.toLocalDate() }
+    val entries = InputReader("/day4.txt")
+            .readLines()
+            .map { parseInput(it, entryPattern, ::validator, ::transformer) }
+            .sortedBy { it.dateTime }
+            .groupBy { it.dateTime.toLocalDate() }
 
     // guard id to per-minute sleep summary
     val times = mutableMapOf<String, IntArray>()

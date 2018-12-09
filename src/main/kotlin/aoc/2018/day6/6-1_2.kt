@@ -1,6 +1,6 @@
 package aoc.`2018`.day6
 
-import util.inputIntoLines
+import util.InputReader
 import util.parseInput
 import kotlin.math.abs
 
@@ -10,8 +10,16 @@ import kotlin.math.abs
 //
 
 fun main(args: Array<String>) {
-    val sources = inputIntoLines("src\\day6\\data.txt")
-        .mapIndexed { index, entry -> parseInput(entry, Regex("(\\d+), *(\\d+)"), { it.size == 3 }, { Source(index, it[1].toInt(), it[2].toInt()) }) }
+    val sources = InputReader("/day6.txt")
+            .readLines()
+            .mapIndexed {
+                index, entry -> parseInput(
+                    entry,
+                    Regex("(\\d+), *(\\d+)"),
+                    { it.size == 3 },
+                    { Source(index, it[1].toInt(), it[2].toInt()) }
+                )
+            }
 
     // normalize
     val minX = sources.minBy { it.x } ?.x ?: abort()

@@ -1,26 +1,18 @@
 package aoc.`2018`.day2
 
+import util.InputReader
 import util.compareAll
-import util.inputIntoLines
 
 //
 // found match: nmgyjkpruszlbaqwficavxneo
 //
 
 fun main(args: Array<String>) {
-    val input = inputIntoLines("src\\day2\\data.txt")
-    val length = input[0].length
+    val input = InputReader("/day2.txt").readLines()
+    val length = input[0].length - 1
     compareAll(input, ::extractMatch)
-        .filter { it.length == length - 1 }
+        .filter { it.length == length }
         .forEach { println("found match: $it") }
 }
 
-private fun extractMatch(l: String, r:String): String {
-    var output = ""
-    for (i in 0 .. (l.length - 1)) {
-        if (l[i] == r[i]) {
-            output += l[i]
-        }
-    }
-    return output
-}
+private fun extractMatch(l: String, r:String) = String(l.toCharArray().filterIndexed { index, c -> c == r[index] }.toCharArray())

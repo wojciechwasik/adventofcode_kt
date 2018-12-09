@@ -1,6 +1,6 @@
 package aoc.`2018`.day8
 
-import util.inputTokenizer
+import util.InputReader
 import java.io.StreamTokenizer.TT_NUMBER
 
 //
@@ -40,7 +40,7 @@ private fun childrenValue(node: Node) = node.metadata.map {
 }
     .sum()
 
-private val tokenizer = inputTokenizer("src\\day8\\data.txt")
+private val tokenizer = InputReader("/day8.txt").tokenize()
 
 private fun readNode(count: Int): List<Node> = (1 .. count).map {
     val (x, y) = readHeader()
