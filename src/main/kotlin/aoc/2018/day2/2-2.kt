@@ -1,4 +1,4 @@
-package day2
+package aoc.`2018`.day2
 
 import util.compareAll
 import util.inputIntoLines

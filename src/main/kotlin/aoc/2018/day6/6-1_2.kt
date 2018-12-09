@@ -1,4 +1,4 @@
-package day6
+package aoc.`2018`.day6
 
 import util.inputIntoLines
 import util.parseInput

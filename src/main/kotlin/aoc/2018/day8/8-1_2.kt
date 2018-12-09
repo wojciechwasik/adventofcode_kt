@@ -1,4 +1,4 @@
-package day8
+package aoc.`2018`.day8
 
 import util.inputTokenizer
 import java.io.StreamTokenizer.TT_NUMBER
