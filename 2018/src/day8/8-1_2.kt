@@ -1,9 +1,6 @@
 package day8
 
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.InputStreamReader
-import java.io.StreamTokenizer
+import util.inputTokenizer
 import java.io.StreamTokenizer.TT_NUMBER
 
 //
@@ -31,18 +28,19 @@ private fun problem2(input: List<Node>) {
     println("root node value is: $result")
 }
 
-private fun nodeValue(node: Node): Int {
-    if (node.children.isEmpty()) return node.metadata.sum()
+private fun nodeValue(node: Node): Int = if (node.children.isEmpty()) metadataValue(node) else childrenValue(node)
 
-    return node.metadata.map {
-        if (it < 1 || it > node.children.size)
-            0
-        else
-            nodeValue(node.children[it - 1])
-    }.sum()
+private fun metadataValue(node: Node) = node.metadata.sum()
+
+private fun childrenValue(node: Node) = node.metadata.map {
+    if (it < 1 || it > node.children.size)
+        0
+    else
+        nodeValue(node.children[it - 1])
 }
+    .sum()
 
-private val tokenizer = StreamTokenizer(BufferedReader(InputStreamReader(FileInputStream("src\\day8\\data.txt"))))
+private val tokenizer = inputTokenizer("src\\day8\\data.txt")
 
 private fun readNode(count: Int): List<Node> = (1 .. count).map {
     val (x, y) = readHeader()

@@ -1,7 +1,6 @@
 package day5
 
-import util.loadInput
-import java.util.*
+import util.inputIntoLines
 
 //
 // final lenght: 9900
@@ -9,7 +8,7 @@ import java.util.*
 //
 
 fun main (args: Array<String>) {
-    val input = loadInput("src\\day5\\data.txt")[0].toCharArray()
+    val input = inputIntoLines("src\\day5\\data.txt")[0].toCharArray()
 
     val length = react(input)
     println("final lenght: $length")

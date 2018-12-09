@@ -1,9 +1,15 @@
 package util
 
+import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.InputStreamReader
+import java.io.StreamTokenizer
 
-fun loadInput(filename: String) = InputStreamReader(FileInputStream(filename)).readLines()
+fun inputIntoLines(filename: String) = inputReader(filename).readLines()
+
+fun inputTokenizer(filename: String) = StreamTokenizer(BufferedReader(inputReader(filename)))
+
+private fun inputReader(filename: String) = InputStreamReader(FileInputStream(filename))
 
 fun <T> parseInput(entry: String, regex: Regex, validator: (List<String>) -> Boolean, transformer: (List<String>) -> T): T {
     val matches = regex.find(entry)

@@ -1,6 +1,6 @@
 package day4
 
-import util.loadInput
+import util.inputIntoLines
 import util.parseInput
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
@@ -16,7 +16,7 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
     // log entries grouped by date
-    val entries = loadInput("src\\day4\\data.txt")
+    val entries = inputIntoLines("src\\day4\\data.txt")
         .map { parseInput(it, entryPattern, ::validator, ::transformer) }
         .sortedBy { it.dateTime }
         .groupBy { it.dateTime.toLocalDate() }

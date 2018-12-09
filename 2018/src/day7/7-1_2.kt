@@ -1,6 +1,6 @@
 package day7
 
-import util.loadInput
+import util.inputIntoLines
 import util.parseInput
 
 //
@@ -9,7 +9,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val input = loadInput("src\\day7\\data.txt")
+    val input = inputIntoLines("src\\day7\\data.txt")
         .map {
             parseInput(
                 it,

@@ -1,14 +1,14 @@
 package day2
 
 import util.compareAll
-import util.loadInput
+import util.inputIntoLines
 
 //
 // found match: nmgyjkpruszlbaqwficavxneo
 //
 
 fun main(args: Array<String>) {
-    val input = loadInput("src\\day2\\data.txt")
+    val input = inputIntoLines("src\\day2\\data.txt")
     val length = input[0].length
     compareAll(input, ::extractMatch)
         .filter { it.length == length - 1 }

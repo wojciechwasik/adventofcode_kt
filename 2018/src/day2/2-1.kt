@@ -1,13 +1,13 @@
 package day2
 
-import util.loadInput
+import util.inputIntoLines
 
 //
 // checksum is 5658
 //
 
 fun main(args: Array<String>) {
-    val result = loadInput("src\\day2\\data.txt")
+    val result = inputIntoLines("src\\day2\\data.txt")
         .map(::extract)
         .fold(Result(0, 0), ::addPartial)
     println("checksum is ${result.sumTwos * result.sumThrees}")

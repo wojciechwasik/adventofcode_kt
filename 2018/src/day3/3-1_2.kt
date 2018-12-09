@@ -1,7 +1,7 @@
 package day3
 
 import util.compareAll
-import util.loadInput
+import util.inputIntoLines
 import util.parseInput
 
 //
@@ -10,7 +10,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val points = loadInput("src\\day3\\data.txt")
+    val points = inputIntoLines("src\\day3\\data.txt")
         .map { parseInput(it, entryPattern, ::validator, ::transformer) }
     val overlapped = mutableSetOf<String>()
 
