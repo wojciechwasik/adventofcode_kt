@@ -3,6 +3,12 @@ package aoc.`2018`.day12
 import util.InputReader
 import util.parseInput
 
+//
+// Result: 3798
+// [139] 11th consecutive diff equal 78, assuming stable solution
+// Final eval: 3900000002212
+//
+
 fun main(args: Array<String>) {
     val input = InputReader("/day12.txt").readLines()
     val initialState = Regex("initial state: (.*)").find(input[0])?.groupValues!![1]
