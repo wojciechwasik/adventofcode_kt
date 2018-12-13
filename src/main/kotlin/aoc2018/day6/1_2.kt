@@ -1,4 +1,4 @@
-package aoc.`2018`.day6
+package aoc2018.day6
 
 import util.InputReader
 import util.parseInput
@@ -94,7 +94,7 @@ fun abort(): Nothing = throw IllegalStateException("This should never happen")
 
 private data class Source(val id: Int, val x: Int, val y: Int) {
 
-    fun transform(dx: Int, dy: Int) = Source(id,x + dx, y + dy)
+    fun transform(dx: Int, dy: Int) = Source(id, x + dx, y + dy)
 
     fun distance(px: Int, py:Int) = abs(x - px) + abs(y - py)
 }

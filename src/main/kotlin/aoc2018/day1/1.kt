@@ -1,4 +1,4 @@
-package aoc.`2018`.day1
+package aoc2018.day1
 
 import util.InputReader
 

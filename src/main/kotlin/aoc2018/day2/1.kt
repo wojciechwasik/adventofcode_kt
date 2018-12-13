@@ -1,4 +1,4 @@
-package aoc.`2018`.day2
+package aoc2018.day2
 
 import util.InputReader
 import kotlin.Array
@@ -24,10 +24,10 @@ private data class Partial(val two: Boolean, val three: Boolean)
 private data class Result(val sumTwos: Int, val sumThrees: Int)
 
 private fun addPartial(result: Result, partial: Partial) =
-    Result(
-        result.sumTwos + (if (partial.two) 1 else 0),
-        result.sumThrees + (if (partial.three) 1 else 0)
-    )
+        Result(
+                result.sumTwos + (if (partial.two) 1 else 0),
+                result.sumThrees + (if (partial.three) 1 else 0)
+        )
 
 
 private fun extract(id: String): Partial {

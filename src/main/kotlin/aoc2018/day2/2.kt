@@ -1,4 +1,4 @@
-package aoc.`2018`.day2
+package aoc2018.day2
 
 import util.InputReader
 import util.compareAll

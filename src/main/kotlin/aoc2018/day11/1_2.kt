@@ -1,4 +1,4 @@
-package aoc.`2018`.day11
+package aoc2018.day11
 
 //
 // X: 243, Y: 49

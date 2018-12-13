@@ -1,4 +1,4 @@
-package aoc.`2018`.day3
+package aoc2018.day3
 
 import util.InputReader
 import util.compareAll
@@ -36,9 +36,9 @@ private val entryPattern = Regex("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)")
 private fun validator(values: List<String>) = values.size == 6
 
 private fun transformer(values: List<String>) = Field(
-    values[1],
-    values[2].toInt(), values[3].toInt(),
-    values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1
+        values[1],
+        values[2].toInt(), values[3].toInt(),
+        values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1
 )
 
 private data class Field(val id: String, val left: Int, val top: Int, val right: Int, val bottom: Int) {

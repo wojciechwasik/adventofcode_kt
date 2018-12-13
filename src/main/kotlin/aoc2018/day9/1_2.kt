@@ -1,4 +1,4 @@
-package aoc.`2018`.day9
+package aoc2018.day9
 
 import util.parseInput
 import java.math.BigInteger
