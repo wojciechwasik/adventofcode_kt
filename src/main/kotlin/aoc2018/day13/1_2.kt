@@ -1,23 +1,23 @@
 package aoc2018.day13
 
 import util.InputReader
+import util.Matrix
+import util.parseMatrix
 
 //
-// Crash on turn 151, at [Cart(id=1, x=57, y=104, dir=W), Cart(id=14, x=57, y=104, dir=N)]
-// Final cart on turn 14047: [Cart(id=15, x=67, y=74, dir=W)]
+// Crash on turn 151, at [Cart(id=6, x=57, y=104, dir=W), Cart(id=2, x=57, y=104, dir=N)]
+// Final cart on turn 14047: [Cart(id=11, x=67, y=74, dir=W)]
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day13.txt").readLines().map { it.toCharArray() }.toTypedArray()
+    val input = parseMatrix(InputReader("/day13.txt").readLines(), { it } )
 
     problem1(input)
 
     problem2(input)
 }
 
-private typealias Grid = Array<CharArray>
-
-private fun problem1(input: Grid) {
+private fun problem1(input: Matrix<Char>) {
     val tracks = initTracks(input)
     val carts = initCarts(input)
 
@@ -31,7 +31,7 @@ private fun problem1(input: Grid) {
     println("Crash on turn $turn, at $crashed")
 }
 
-private fun problem2(input: Grid) {
+private fun problem2(input: Matrix<Char>) {
     val tracks = initTracks(input)
     val carts = initCarts(input).toMutableList()
 
@@ -48,45 +48,41 @@ private fun problem2(input: Grid) {
     println("Final cart on turn $turn: $carts")
 }
 
-private fun initTracks(input: Grid): Grid = input.map {
-    row -> row.map {
-        when (it) {
+private fun initTracks(input: Matrix<Char>) = input.mapIndexed { x, y, v ->
+        when (v) {
             '^', 'v' -> '|'
             '<', '>' -> '-'
-            else -> it
+            else -> v
         }
-    }.toCharArray()
-}.toTypedArray()
+    }
 
-private fun initCarts(input: Grid): List<Cart> {
+private fun initCarts(input: Matrix<Char>): List<Cart> {
     var id = 0
     val carts = mutableListOf<Cart>()
-    for (y in 0 until input.size) {
-        for (x in 0 until input[y].size) {
-            when (input[y][x]) {
-                '^' -> {
-                    carts.add(Cart(id, x, y, Direction.N))
-                    id++
-                }
-                'v' -> {
-                    carts.add(Cart(id, x, y, Direction.S))
-                    id++
-                }
-                '<' -> {
-                    carts.add(Cart(id, x, y, Direction.W))
-                    id++
-                }
-                '>' -> {
-                    carts.add(Cart(id, x, y, Direction.E))
-                    id++
-                }
+    input.forEachIndexed { x, y, v ->
+        when (v) {
+            '^' -> {
+                carts.add(Cart(id, x, y, Direction.N))
+                id++
+            }
+            'v' -> {
+                carts.add(Cart(id, x, y, Direction.S))
+                id++
+            }
+            '<' -> {
+                carts.add(Cart(id, x, y, Direction.W))
+                id++
+            }
+            '>' -> {
+                carts.add(Cart(id, x, y, Direction.E))
+                id++
             }
         }
     }
     return carts
 }
 
-private fun moveCarts(tracks: Grid, carts: List<Cart>): List<Cart> {
+private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
     val crashed = mutableListOf<Cart>()
     val order = carts.sortedBy { it.y * 10000 + it.x }
 
@@ -100,7 +96,7 @@ private fun moveCarts(tracks: Grid, carts: List<Cart>): List<Cart> {
             cart.move()
 
             // turn if necessary
-            when (tracks[cart.y][cart.x]) {
+            when (tracks[cart.x, cart.y]) {
                 '/' -> {
                     cart.dir = when (cart.dir) {
                         Direction.N -> Direction.E
