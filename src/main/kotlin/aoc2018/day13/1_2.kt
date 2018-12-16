@@ -1,12 +1,10 @@
 package aoc2018.day13
 
-import util.InputReader
-import util.Matrix
-import util.parseMatrix
+import util.*
 
 //
-// Crash on turn 151, at [Cart(id=6, x=57, y=104, dir=W), Cart(id=2, x=57, y=104, dir=N)]
-// Final cart on turn 14047: [Cart(id=11, x=67, y=74, dir=W)]
+// Crash on turn 151, at [Cart(id=6, p=Point(x=57, y=104), dir=W, turn=L), Cart(id=2, p=Point(x=57, y=104), dir=N, turn=R)]
+// Final cart on turn 14047: [Cart(id=11, p=Point(x=67, y=74), dir=W, turn=L)]
 //
 
 fun main(args: Array<String>) {
@@ -48,7 +46,7 @@ private fun problem2(input: Matrix<Char>) {
     println("Final cart on turn $turn: $carts")
 }
 
-private fun initTracks(input: Matrix<Char>) = input.mapIndexed { x, y, v ->
+private fun initTracks(input: Matrix<Char>) = input.mapIndexed { _, _, v ->
         when (v) {
             '^', 'v' -> '|'
             '<', '>' -> '-'
@@ -61,30 +59,23 @@ private fun initCarts(input: Matrix<Char>): List<Cart> {
     val carts = mutableListOf<Cart>()
     input.forEachIndexed { x, y, v ->
         when (v) {
-            '^' -> {
-                carts.add(Cart(id, x, y, Direction.N))
-                id++
-            }
-            'v' -> {
-                carts.add(Cart(id, x, y, Direction.S))
-                id++
-            }
-            '<' -> {
-                carts.add(Cart(id, x, y, Direction.W))
-                id++
-            }
-            '>' -> {
-                carts.add(Cart(id, x, y, Direction.E))
-                id++
-            }
+            '^', 'v', '<', '>' -> carts.add(Cart(id++, Point(x, y), toDirection(v)))
         }
     }
     return carts
 }
 
+private fun toDirection(c: Char) = when (c) {
+    '^' -> Direction.N
+    'v' -> Direction.S
+    '<' -> Direction.W
+    '>' -> Direction.E
+    else -> throw IllegalArgumentException("direction symbol: $c")
+}
+
 private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
     val crashed = mutableListOf<Cart>()
-    val order = carts.sortedBy { it.y * 10000 + it.x }
+    val order = carts.sortedBy { it.p.y * tracks.xMax + it.p.x }
 
     for (i in 0 until order.size) {
         val cart = order[i]
@@ -96,7 +87,7 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
             cart.move()
 
             // turn if necessary
-            when (tracks[cart.x, cart.y]) {
+            when (tracks[cart.p.x, cart.p.y]) {
                 '/' -> {
                     cart.dir = when (cart.dir) {
                         Direction.N -> Direction.E
@@ -119,7 +110,7 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
 
             // detect crash
             order.forEach {
-                if (it.x == cart.x && it.y == cart.y && it != cart && !crashed.contains(it)) {
+                if (it.p.x == cart.p.x && it.p.y == cart.p.y && it != cart && !crashed.contains(it)) {
                     crashed.add(cart)
                     crashed.add(it)
                     return@forEach
@@ -131,29 +122,25 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
     return crashed
 }
 
-private enum class Direction { N, E, S, W }
-
 private enum class Turn { L, S, R }
 
-private data class Cart(val id: Int, var x: Int, var y: Int, var dir: Direction) {
+private data class Cart(val id: Int, var p: Point, var dir: Direction) {
     var turn = Turn.L
 
     fun move() {
-        when (dir) {
-            Direction.N -> y--
-            Direction.E -> x++
-            Direction.S -> y++
-            Direction.W -> x--
-        }
+        p = dir.move(p)
     }
 
     fun crossroads() {
-        val d = when (turn) {
-            Turn.L -> dir.ordinal - 1
-            Turn.R -> dir.ordinal + 1
-            else -> dir.ordinal
+        dir = when (turn) {
+            Turn.L -> dir.turnLeft()
+            Turn.R -> dir.turnRight()
+            else -> dir
         }
-        dir = Direction.values()[((d % 4) + 4) % 4]
         turn = Turn.values()[(turn.ordinal + 1) % 3]
+    }
+
+    override fun toString(): String {
+        return "Cart(id=$id, p=$p, dir=$dir, turn=$turn)"
     }
 }
