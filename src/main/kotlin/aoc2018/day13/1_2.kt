@@ -87,7 +87,7 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
             cart.move()
 
             // turn if necessary
-            when (tracks[cart.p.x, cart.p.y]) {
+            when (tracks[cart.p]) {
                 '/' -> {
                     cart.dir = when (cart.dir) {
                         Direction.N -> Direction.E
@@ -110,7 +110,7 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
 
             // detect crash
             order.forEach {
-                if (it.p.x == cart.p.x && it.p.y == cart.p.y && it != cart && !crashed.contains(it)) {
+                if (it.p == cart.p && it != cart && !crashed.contains(it)) {
                     crashed.add(cart)
                     crashed.add(it)
                     return@forEach

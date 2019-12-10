@@ -16,9 +16,13 @@ data class Matrix<T>(val data: Array<Array<T>>, val xMax: Int, val yMax: Int) {
 
     operator fun get(x: Int, y: Int) = data[x][y]
 
+    operator fun get(p: Point) = get(p.x, p.y)
+
     operator fun set(x: Int, y: Int, value: T) {
         data[x][y] = value
     }
+
+    operator fun set(p: Point, value: T) = set(p.x, p.y, value)
 
     inline fun <reified R> mapIndexed(transform: (Int, Int, T) -> R) =
             Matrix(data.mapIndexed { x, column ->
@@ -35,4 +39,8 @@ data class Matrix<T>(val data: Array<Array<T>>, val xMax: Int, val yMax: Int) {
             }
         }
     }
+
+    fun contains(x: Int, y: Int) = (x in 0 until xMax) && (y in 0 until yMax)
+
+    fun contains(p: Point) = contains(p.x, p.y)
 }
