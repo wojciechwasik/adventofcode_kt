@@ -9,7 +9,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day10.txt").readLines()
+    val input = InputReader("/aoc2018/day10.txt").readLines()
     val points = input.map {
         parseInput(it,
                 Regex("position=< *(-?\\d+), +(-?\\d+)> velocity=< *(-?\\d+), +(-?\\d+)>"),

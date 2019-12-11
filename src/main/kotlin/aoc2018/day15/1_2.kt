@@ -6,7 +6,7 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day15.txt").readLines()
+    val input = InputReader("/aoc2018/day15.txt").readLines()
 
     problem1(input)
 

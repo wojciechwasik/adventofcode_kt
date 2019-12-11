@@ -7,6 +7,6 @@ import util.InputReader
 //
 
 fun main(args: Array<String>) {
-    val result = InputReader("/day1.txt").readLines().sumBy { it.toInt() }
+    val result = InputReader("/aoc2018/day1.txt").readLines().sumBy { it.toInt() }
     println(result)
 }

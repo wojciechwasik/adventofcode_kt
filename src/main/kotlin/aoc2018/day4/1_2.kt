@@ -16,7 +16,7 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
     // log entries grouped by date
-    val entries = InputReader("/day4.txt")
+    val entries = InputReader("/aoc2018/day4.txt")
             .readLines()
             .map { parseInput(it, entryPattern, ::validator, ::transformer) }
             .sortedBy { it.dateTime }

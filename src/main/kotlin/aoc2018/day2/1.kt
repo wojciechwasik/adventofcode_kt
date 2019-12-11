@@ -12,7 +12,7 @@ import kotlin.String
 //
 
 fun main(args: Array<String>) {
-    val result = InputReader("/day2.txt")
+    val result = InputReader("/aoc2018/day2.txt")
             .readLines()
             .map(::extract)
             .fold(Result(0, 0), ::addPartial)

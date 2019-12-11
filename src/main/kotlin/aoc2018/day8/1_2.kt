@@ -40,7 +40,7 @@ private fun childrenValue(node: Node) = node.metadata.map {
 }
     .sum()
 
-private val tokenizer = InputReader("/day8.txt").tokenize()
+private val tokenizer = InputReader("/aoc2018/day8.txt").tokenize()
 
 private fun readNode(count: Int): List<Node> = (1 .. count).map {
     val (x, y) = readHeader()

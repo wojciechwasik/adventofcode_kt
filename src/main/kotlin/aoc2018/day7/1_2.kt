@@ -9,7 +9,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day7.txt")
+    val input = InputReader("/aoc2018/day7.txt")
             .readLines()
             .map {
                 parseInput(

@@ -8,7 +8,7 @@ import util.InputReader
 //
 
 fun main (args: Array<String>) {
-    val input = InputReader("/day5.txt").readLines()[0].toCharArray()
+    val input = InputReader("/aoc2018/day5.txt").readLines()[0].toCharArray()
 
     val length = react(input)
     println("final lenght: $length")

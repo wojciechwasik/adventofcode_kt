@@ -10,7 +10,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day12.txt").readLines()
+    val input = InputReader("/aoc2018/day12.txt").readLines()
     val initialState = Regex("initial state: (.*)").find(input[0])?.groupValues!![1]
     val rules = input.subList(2, input.size).map { entry ->
         parseInput(entry,

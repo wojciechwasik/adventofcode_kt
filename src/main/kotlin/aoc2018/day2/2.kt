@@ -8,7 +8,7 @@ import util.compareAll
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/day2.txt").readLines()
+    val input = InputReader("/aoc2018/day2.txt").readLines()
     val length = input[0].length - 1
     compareAll(input, ::extractMatch)
         .filter { it.length == length }

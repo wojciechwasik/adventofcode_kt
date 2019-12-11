@@ -8,7 +8,7 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = parseMatrix(InputReader("/day13.txt").readLines(), { it } )
+    val input = parseMatrix(InputReader("/aoc2018/day13.txt").readLines(), { it } )
 
     problem1(input)
 

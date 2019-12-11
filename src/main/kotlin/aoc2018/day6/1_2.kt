@@ -10,7 +10,7 @@ import kotlin.math.abs
 //
 
 fun main(args: Array<String>) {
-    val sources = InputReader("/day6.txt")
+    val sources = InputReader("/aoc2018/day6.txt")
             .readLines()
             .mapIndexed {
                 index, entry -> parseInput(

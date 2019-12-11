@@ -10,7 +10,7 @@ import util.parseInput
 //
 
 fun main(args: Array<String>) {
-    val points = InputReader("/day3.txt")
+    val points = InputReader("/aoc2018/day3.txt")
             .readLines()
             .map { parseInput(it, entryPattern, ::validator, ::transformer) }
     val overlapped = mutableSetOf<String>()
