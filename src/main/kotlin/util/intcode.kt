@@ -29,20 +29,18 @@ class Intcode(input: List<Int>) {
     fun run(vararg opcodes: Int) {
         loop@ while (true) {
             val opcode = memory[ptr]
-            if (opcode !in opcodes) abort(opcode)
+            if (opcode !in opcodes) abort("Illegal opcode: ${opcode} at ${ptr}")
 
             when (opcode) {
                 1 -> setPtr(ptr + 3, getPtr(ptr + 1) + getPtr(ptr + 2))
                 2 -> setPtr(ptr + 3, getPtr(ptr + 1) * getPtr(ptr + 2))
                 99 -> break@loop
-                else -> abort(opcode)
+                else -> abort("Illegal opcode: ${opcode} at ${ptr}")
             }
 
             ptr += 4
         }
     }
-
-    private fun abort(opcode: Int): Nothing = throw IllegalStateException("Illegal opcode: ${opcode} at ${ptr}")
 
     private fun getPtr(addr: Int) = memory[memory[addr]]
 

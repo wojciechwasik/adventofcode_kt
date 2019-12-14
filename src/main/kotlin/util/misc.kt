@@ -9,3 +9,5 @@ inline fun <T> timer(message: String, code: () -> T):T {
         println("$message: ${t2 - t1} ns")
     }
 }
+
+fun abort(message: String): Nothing = throw IllegalStateException(message)

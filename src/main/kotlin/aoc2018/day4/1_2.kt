@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
 
     // guard id to per-minute sleep summary
     val times = mutableMapOf<String, IntArray>()
-    for ((date, events) in entries) {
+    for ((_, events) in entries) {
         val time = times.getOrPut(events[0].entry) { IntArray(60) }
         for (i in 1 .. events.size - 1 step 2)
             for (m in events[i].dateTime.minute .. events[i + 1].dateTime.minute - 1)
