@@ -1,6 +1,4 @@
-package aoc2019.day4
-
-import util.*
+package aoc2019
 
 //
 // Number of possible passwords: 1653

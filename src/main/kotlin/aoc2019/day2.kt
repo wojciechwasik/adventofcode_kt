@@ -1,4 +1,4 @@
-package aoc2019.day2
+package aoc2019
 
 import util.InputReader
 import util.Intcode

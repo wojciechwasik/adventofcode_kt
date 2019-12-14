@@ -1,4 +1,4 @@
-package aoc2019.day3
+package aoc2019
 
 import util.*
 
