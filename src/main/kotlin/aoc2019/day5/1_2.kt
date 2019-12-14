@@ -3,8 +3,8 @@ package aoc2019.day5
 import util.*
 
 //
-// 7259358
-// 11826654
+// Diagnostic code for system 1: 7259358
+// Diagnostic code for system 5: 11826654
 //
 
 fun main(args: Array<String>) {
@@ -16,11 +16,13 @@ fun main(args: Array<String>) {
 }
 
 private fun problem1(input: List<Int>) {
-    val intcode = Intcode(input)
-    intcode.run(1, 2, 3, 4, 99)
+    val intcode = Intcode(input, 1, 2, 3, 4, 99)
+    val output = intcode.run(listOf(1))
+    println("Diagnostic code for system 1: ${output.last()}")
 }
 
 private fun problem2(input: List<Int>) {
-    val intcode = Intcode(input)
-    intcode.run(1, 2, 3, 4, 5, 6, 7, 8, 99)
+    val intcode = Intcode(input, 1, 2, 3, 4, 5, 6, 7, 8, 99)
+    val output = intcode.run(listOf(5))
+    println("Diagnostic code for system 5: ${output[0]}")
 }

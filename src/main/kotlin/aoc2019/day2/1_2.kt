@@ -21,8 +21,8 @@ private fun problem1(input: List<Int>) {
     data[1] = 12
     data[2] = 2
 
-    val intcode = Intcode(data)
-    intcode.run(1, 2, 99)
+    val intcode = Intcode(data, 1, 2, 99)
+    intcode.run()
 
     println("Value at 0 is: ${intcode[0]}")
 }
@@ -34,8 +34,8 @@ private fun problem2(input: List<Int>) {
             data[1] = noun
             data[2] = verb
 
-            val intcode = Intcode(data)
-            intcode.run(1, 2, 99)
+            val intcode = Intcode(data, 1, 2, 99)
+            intcode.run()
 
             if (intcode[0] == 19690720) {
                 println("Noun and verb combination: ${noun * 100 + verb}")

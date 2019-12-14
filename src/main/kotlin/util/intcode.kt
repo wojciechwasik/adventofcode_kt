@@ -3,13 +3,13 @@ package util
 /**
  * Intcode computer for AOC 2019.
  * - input - initial memory state
+ * - opcodes - list of opcodes that are enabled
  */
-class Intcode(input: List<Int>) {
-    val state = input.toList()
-    var memory = state.toMutableList()
-    var ptr = 0
-    var opcode = 0
-    var modes = ""
+class Intcode(private val state: List<Int>, vararg val opcodes: Int) {
+    private var memory = state.toMutableList()
+    private var ptr = 0
+    private var opcode = 0
+    private var modes = ""
 
     /**
      * Read memory
@@ -17,30 +17,22 @@ class Intcode(input: List<Int>) {
     operator fun get(addr:Int) = memory[addr]
 
     /**
-     * Reset to initial state
+     * Run program with optional inputs
      */
-    fun reset() {
-        memory = state.toMutableList()
-        ptr = 0
-        modes = ""
-    }
-
-    /**
-     * Run program
-     * - opcodes - list of opcodes (commands) that are valid for this run
-     */
-    fun run(vararg opcodes: Int) {
+    fun run(data: List<Int> = emptyList()): MutableList<Int> {
+        val input = data.toMutableList()
+        val output = mutableListOf<Int>()
         while (true) {
             opcode = memory[ptr] % 100
             modes = (memory[ptr] / 100).toString().reversed()
-//            println("opcode: ${opcode}, modes: ${modes}")
             if (opcode !in opcodes) abort("Illegal opcode: ${opcode} at ${ptr}")
             if (opcode == 99) break
-            command()
+            command(input, output)
         }
+        return output
     }
 
-    private fun command() {
+    private fun command(input: MutableList<Int>, output: MutableList<Int>) {
         when (opcode) {
             1 -> { // add
                 store(3, load(1) + load(2))
@@ -51,12 +43,17 @@ class Intcode(input: List<Int>) {
                 ptr += 4
             }
             3 -> { // input
-                print("> ")
-                store(1, readLine()!!.toInt())
+                if (input.isEmpty()) {
+                    print("> ")
+                    store(1, readLine()!!.toInt())
+                }
+                else {
+                    store(1, input.removeAt(0))
+                }
                 ptr += 2
             }
             4 -> { // output
-                println(load(1))
+                output.add(load(1))
                 ptr += 2
             }
             5 -> { // jump if true
