@@ -8,6 +8,11 @@ class InputReader(val filename:String) {
 
     fun readLines() = getResourceReader().readLines()
 
+    fun <T> readSequence(separator: Char, transformer: (String) -> T): List<T> = readLines()[0].split(separator).map(transformer)
+
+    fun <T> readSequences(separator: Char, count: Int, transformer: (String) -> T): List<List<T>> =
+            readLines().subList(0, count).map { it.split(separator).map(transformer) }
+
     fun tokenize() = StreamTokenizer(BufferedReader(getResourceReader()))
 
     private fun getResourceReader() = InputStreamReader(this::class.java.getResourceAsStream(filename))

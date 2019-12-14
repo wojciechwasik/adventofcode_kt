@@ -8,13 +8,11 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day3.txt").readLines()
-    val wire1 = input[0].split(',')
-    val wire2 = input[1].split(',')
+    val input = InputReader("/aoc2019/day3.txt").readSequences(',', 2, { it })
 
-    problem1(wire1, wire2)
+    problem1(input[0], input[1])
 
-    problem2(wire1, wire2)
+    problem2(input[0], input[1])
 }
 
 private fun problem1(wire1: List<String>, wire2: List<String>) {

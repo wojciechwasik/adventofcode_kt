@@ -9,7 +9,7 @@ import util.Intcode
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day2.txt").readLines()[0].split(',').map(Integer::parseInt)
+    val input = InputReader("/aoc2019/day2.txt").readSequence(',', Integer::parseInt)
 
     problem1(input)
 
