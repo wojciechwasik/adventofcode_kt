@@ -8,20 +8,20 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day5.txt").readSequence(',', Integer::parseInt)
+    val input = InputReader("/aoc2019/day5.txt").readSequence(',') { it.toLong() }
 
     problem1(input)
 
     problem2(input)
 }
 
-private fun problem1(input: List<Int>) {
+private fun problem1(input: List<Long>) {
     val intcode = Intcode(input, 1, 2, 3, 4, 99)
     val output = intcode.run(listOf(1))
     println("Diagnostic code for system 1: ${output.last()}")
 }
 
-private fun problem2(input: List<Int>) {
+private fun problem2(input: List<Long>) {
     val intcode = Intcode(input, 1, 2, 3, 4, 5, 6, 7, 8, 99)
     val output = intcode.run(listOf(5))
     println("Diagnostic code for system 5: ${output[0]}")

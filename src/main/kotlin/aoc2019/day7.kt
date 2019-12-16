@@ -8,22 +8,22 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day7.txt").readSequence(',', Integer::parseInt)
+    val input = InputReader("/aoc2019/day7.txt").readSequence(',') { it.toLong() }
 
     problem1(input)
 
     problem2(input)
 }
 
-private fun problem1(input: List<Int>) {
+private fun problem1(input: List<Long>) {
     var max = emptyList<Int>()
-    var maxSignal = 0
+    var maxSignal = 0L
 
     permutations(listOf(0, 1, 2, 3, 4)).forEach { setup ->
-        var power = 0
+        var power = 0L
         setup.forEach { phase ->
             val intcode = Intcode(input)
-            power = intcode.run(listOf(phase, power))[0]
+            power = intcode.run(listOf(phase.toLong(), power))[0]
         }
 
         if (power > maxSignal) {
@@ -35,12 +35,12 @@ private fun problem1(input: List<Int>) {
     println("Maximum power signal: ${maxSignal}, phase setup: ${max}")
 }
 
-private fun problem2(input: List<Int>) {
+private fun problem2(input: List<Long>) {
     var max = emptyList<Int>()
-    var maxSignal = 0
+    var maxSignal = 0L
 
     permutations(listOf(5, 6, 7, 8, 9)).forEach { setup ->
-        var power = 0
+        var power = 0L
         var amps = listOf(
                 Intcode(input),
                 Intcode(input),
@@ -48,7 +48,7 @@ private fun problem2(input: List<Int>) {
                 Intcode(input),
                 Intcode(input)
         )
-        setup.forEachIndexed { i, phase -> amps[i].run(listOf(phase)) }
+        setup.forEachIndexed { i, phase -> amps[i].run(listOf(phase.toLong())) }
 
         while (!amps[4].isFinished()) {
             amps.forEach { amp ->
