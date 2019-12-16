@@ -10,11 +10,17 @@ class Intcode(private val state: List<Int>, vararg val opcodes: Int) {
     private var ptr = 0
     private var opcode = 0
     private var modes = ""
+    private var finished = false
 
     /**
      * Read memory
      */
     operator fun get(addr:Int) = memory[addr]
+
+    /**
+     * Check if program finished
+     */
+    fun isFinished() = finished
 
     /**
      * Run program with optional inputs
@@ -25,14 +31,14 @@ class Intcode(private val state: List<Int>, vararg val opcodes: Int) {
         while (true) {
             opcode = memory[ptr] % 100
             modes = (memory[ptr] / 100).toString().reversed()
-            if (opcode !in opcodes) abort("Illegal opcode: ${opcode} at ${ptr}")
-            if (opcode == 99) break
-            command(input, output)
+            if (opcodes.isNotEmpty() && opcode !in opcodes) abort("Illegal opcode: ${opcode} at ${ptr}")
+            if (command(input, output)) break
         }
         return output
     }
 
-    private fun command(input: MutableList<Int>, output: MutableList<Int>) {
+    private fun command(input: MutableList<Int>, output: MutableList<Int>): Boolean {
+        var halt = false
         when (opcode) {
             1 -> { // add
                 store(3, load(1) + load(2))
@@ -44,13 +50,13 @@ class Intcode(private val state: List<Int>, vararg val opcodes: Int) {
             }
             3 -> { // input
                 if (input.isEmpty()) {
-                    print("> ")
-                    store(1, readLine()!!.toInt())
+                    // halt execution until more input is available
+                    halt = true
                 }
                 else {
                     store(1, input.removeAt(0))
+                    ptr += 2
                 }
-                ptr += 2
             }
             4 -> { // output
                 output.add(load(1))
@@ -74,8 +80,13 @@ class Intcode(private val state: List<Int>, vararg val opcodes: Int) {
                 else store(3, 0)
                 ptr += 4
             }
+            99 -> { // program finished
+                finished = true
+                halt = true
+            }
             else -> abort("Illegal opcode: ${opcode} at ${ptr}")
         }
+        return halt
     }
 
     private fun positionMode(offset: Int) = offset > modes.length || modes[offset - 1] == '0'
