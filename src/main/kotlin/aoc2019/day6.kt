@@ -23,11 +23,11 @@ private fun problem1(input: List<Pair<String, String>>) {
     val tree = buildFromEdges<Int>(input)
 
     var count = 0
-    tree["COM"]!!.traverse({
+    tree["COM"]!!.traverse {
         val orbits = (it.parent?.value ?: -1) + 1
         it.value = orbits
         count += orbits
-    })
+    }
 
     println("Number of orbits: ${count}")
 }
