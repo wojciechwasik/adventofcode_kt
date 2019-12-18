@@ -15,10 +15,27 @@ inline fun <T> timer(message: String, code: () -> T):T {
 }
 
 fun gcd(a: Int, b: Int): Int {
-    val x = max(a, b)
-    val y = min(a, b)
-    val r = x % y
-    return if (r == 0) y else gcd(y, r)
+    var x = max(a, b)
+    var y = min(a, b)
+    var r = x % y
+    while (r != 0) {
+        x = max(y, r)
+        y = min(y, r)
+        r = x % y
+    }
+    return y
+}
+
+fun gcd(a: Long, b: Long): Long {
+    var x = max(a, b)
+    var y = min(a, b)
+    var r = x % y
+    while (r != 0L) {
+        x = max(y, r)
+        y = min(y, r)
+        r = x % y
+    }
+    return y
 }
 
 /**
