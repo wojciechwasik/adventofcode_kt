@@ -16,7 +16,14 @@ class Intcode(private val state: List<Long>, vararg val opcodes: Int) {
     /**
      * Read memory
      */
-    operator fun get(addr:Int) = memory.read(addr)
+    operator fun get(addr: Int) = memory.read(addr)
+
+    /**
+     * Write memory
+     */
+    operator fun set(addr: Int, value: Long): Unit {
+        memory.write(addr, value)
+    }
 
     /**
      * Check if program finished
