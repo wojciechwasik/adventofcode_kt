@@ -30,31 +30,8 @@ private fun problem2(input: List<Long>) {
 
     paint(panels, input)
 
-    val minX = panels.keys.minBy { it.x }!!.x
-    val maxX = panels.keys.maxBy { it.x }!!.x
-    val minY = panels.keys.minBy { it.y }!!.y
-    val maxY = panels.keys.maxBy { it.y }!!.y
-
-    // init matrix
-    val matrix = arrayListOf<ArrayList<Boolean>>()
-    for (y in 0..(maxY - minY + 1)) {
-        val row = arrayListOf<Boolean>()
-        for (x in 0..(maxX - minX + 1)) {
-            row.add(false)
-        }
-        matrix.add(row)
-    }
-
-    // copy white panels to matrix
-    panels.keys.forEach {
-        matrix[it.y][it.x] = (panels[it]!! == 1L)
-    }
-
-    // print out matrix
-    matrix.forEach { row ->
-        row.forEach { if (it) print('#') else print(' ') }
-        print('\n')
-    }
+    val display = SparseDisplay<Long>(80, 10) { if (it == 1L) '#' else ' ' }
+    display.draw(panels.entries.map { Pair(it.key, it.value) })
 }
 
 private fun paint(panels: MutableMap<Point, Long>, input: List<Long>): Unit {
