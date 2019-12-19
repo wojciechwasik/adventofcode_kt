@@ -4,11 +4,11 @@ import util.*
 
 //
 // Area of tractor beam: 226
-// Problem 2 solution: 
+// Problem 2 solution:
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day19.txt").readSequence(',') { it.toLong() }
+    val input = InputReader("/aoc2019/day19.txt").readSequenceLong(',')
 
     problem1(input)
 

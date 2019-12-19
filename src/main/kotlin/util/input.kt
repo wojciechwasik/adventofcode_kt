@@ -10,6 +10,8 @@ class InputReader(val filename:String) {
 
     fun <T> readSequence(separator: Char, transformer: (String) -> T): List<T> = readLines()[0].split(separator).map(transformer)
 
+    fun readSequenceLong(separator: Char) = readSequence(separator) { it.toLong() }
+
     fun <T> readSequences(separator: Char, count: Int, transformer: (String) -> T): List<List<T>> =
             readLines().subList(0, count).map { it.split(separator).map(transformer) }
 

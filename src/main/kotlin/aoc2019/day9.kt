@@ -8,7 +8,7 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day9.txt").readSequence(',') { it.toLong() }
+    val input = InputReader("/aoc2019/day9.txt").readSequenceLong(',')
 
     problem1(input)
 

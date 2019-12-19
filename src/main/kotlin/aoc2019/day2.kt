@@ -10,7 +10,7 @@ import java.lang.Long.parseLong
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2019/day2.txt").readSequence(',') { it.toLong() }
+    val input = InputReader("/aoc2019/day2.txt").readSequenceLong(',')
 
     problem1(input)
 
