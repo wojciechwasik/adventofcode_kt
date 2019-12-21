@@ -26,12 +26,9 @@ fun <T> parseInput(entry: String, regex: Regex, validator: (List<String>) -> Boo
     throw IllegalArgumentException("not matching: $entry")
 }
 
-inline fun <reified T> parseMatrix(lines: List<String>, transformer: (Char) -> T): Matrix<T> {
+fun <T> parseGrid(lines: List<String>, default: T, transformer: (Char) -> T): Grid<T> {
     val tmp = lines.map { it.toCharArray().map(transformer) }
-
     val x = tmp[0].size
     val y = tmp.size
-    val data = Array<Array<T>>(x) { i -> Array<T>(y) { j -> tmp[j][i] } }
-
-    return Matrix(data, x, y)
+    return Grid(default, tmp, x, y)
 }

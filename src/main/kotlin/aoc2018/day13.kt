@@ -8,14 +8,14 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = parseMatrix(InputReader("/aoc2018/day13.txt").readLines(), { it } )
+    val input = parseGrid(InputReader("/aoc2018/day13.txt").readLines(), ' ', { it } )
 
     problem1(input)
 
     problem2(input)
 }
 
-private fun problem1(input: Matrix<Char>) {
+private fun problem1(input: Grid<Char>) {
     val tracks = initTracks(input)
     val carts = initCarts(input)
 
@@ -29,7 +29,7 @@ private fun problem1(input: Matrix<Char>) {
     println("Crash on turn $turn, at $crashed")
 }
 
-private fun problem2(input: Matrix<Char>) {
+private fun problem2(input: Grid<Char>) {
     val tracks = initTracks(input)
     val carts = initCarts(input).toMutableList()
 
@@ -46,7 +46,7 @@ private fun problem2(input: Matrix<Char>) {
     println("Final cart on turn $turn: $carts")
 }
 
-private fun initTracks(input: Matrix<Char>) = input.mapIndexed { _, _, v ->
+private fun initTracks(input: Grid<Char>) = input.map { v ->
         when (v) {
             '^', 'v' -> '|'
             '<', '>' -> '-'
@@ -54,7 +54,7 @@ private fun initTracks(input: Matrix<Char>) = input.mapIndexed { _, _, v ->
         }
     }
 
-private fun initCarts(input: Matrix<Char>): List<Cart> {
+private fun initCarts(input: Grid<Char>): List<Cart> {
     var id = 0
     val carts = mutableListOf<Cart>()
     input.forEachIndexed { x, y, v ->
@@ -73,7 +73,7 @@ private fun toDirection(c: Char) = when (c) {
     else -> abort("direction symbol: $c")
 }
 
-private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
+private fun moveCarts(tracks: Grid<Char>, carts: List<Cart>): List<Cart> {
     val crashed = mutableListOf<Cart>()
     val order = carts.sortedBy { it.p.y * tracks.xMax + it.p.x }
 

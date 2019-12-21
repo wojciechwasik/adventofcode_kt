@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
 }
 
 private fun problem1(input: List<String>) {
-    var board = parseMatrix(input, { it } )
+    var board = parseGrid(input, '#', { it } )
     var units = mutableListOf<Warrior>()
     var id = 0
     board.forEachIndexed { x, y, v ->
@@ -56,9 +56,7 @@ private fun problem1(input: List<String>) {
 //    println("")
 //}
 
-typealias Board = Matrix<Char>
-
-private fun printBoard(board: Board) {
+private fun printBoard(board: Grid<Char>) {
     for (y in 0 until board.yMax) {
         for (x in 0 until board.xMax) print(board[x, y])
         print('\n')
@@ -74,7 +72,7 @@ private fun printBoard(board: Board) {
 //
 // (*) - choose enemy with lowest HP, then N/S/E/W
 // (**) - N/S/E/W
-private fun round(board: Board, units: MutableList<Warrior>): Pair<Board, MutableList<Warrior>> {
+private fun round(board: Grid<Char>, units: MutableList<Warrior>): Pair<Grid<Char>, MutableList<Warrior>> {
     val order = units.sortedBy { it.p.y * board.xMax + it.p.x }
     order.forEach { warrior ->
         val targets = findTargetLocations(board, units, warrior.type)
@@ -103,7 +101,7 @@ private fun round(board: Board, units: MutableList<Warrior>): Pair<Board, Mutabl
 // - generate target locations
 // - filter locations outside board
 // - filter non-empty locations
-private fun findTargetLocations(board: Board, units: MutableList<Warrior>, friendly: Type) = units.filter {
+private fun findTargetLocations(board: Grid<Char>, units: MutableList<Warrior>, friendly: Type) = units.filter {
     it.type != friendly
 }.flatMap {
     Direction.values().map { d -> d.move(it.p) }
@@ -114,7 +112,7 @@ private fun findTargetLocations(board: Board, units: MutableList<Warrior>, frien
 // branch out from parent
 // - skip branches going into occupied fields
 // - skip branches looping back into path
-private fun findPath(board: Board, targets: Set<Point>, parent: Node): Set<Node> {
+private fun findPath(board: Grid<Char>, targets: Set<Point>, parent: Node): Set<Node> {
     val branches = Direction.values().map {
         it.move(parent.p)
     }.filter {
