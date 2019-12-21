@@ -8,29 +8,31 @@ import util.*
 //
 
 fun main(args: Array<String>) {
-    val input = InputReader("/aoc2018/day10.txt").readLines()
-    val points = input.map {
+    val input = InputReader("/aoc2018/day10.txt").readLines().map {
         parseInput(it,
                 Regex("position=< *(-?\\d+), +(-?\\d+)> velocity=< *(-?\\d+), +(-?\\d+)>"),
                 { it.size == 5 },
-                { Point(it[1].toInt(), it[2].toInt(), it[3].toInt(), it[4].toInt()) }
+                { Pair(Point(it[1].toInt(), it[2].toInt()), Vector(it[3].toInt(), it[4].toInt())) }
         )
     }
 
-    problem(points)
+    problem(input)
 }
 
-private fun problem(points: List<Point>) {
+private fun problem(input: List<Pair<Point, Vector>>) {
+    var points = input.map{ it.first }
+    val vectors = input.map { it.second }
+
     var time = 0
     var height = calculateHeight(points)
     do {
-        points.forEach { it.move() }
+        points = points.mapIndexed { i, it -> it.move(vectors[i]) }
         time++
         val oldHeight = height
         height = calculateHeight(points)
     } while (height < oldHeight)
 
-    points.forEach { it.revert() }
+    points = points.mapIndexed { i, it -> it.move(-vectors[i]) }
     time--
     height = calculateHeight(points)
 
@@ -54,17 +56,5 @@ private fun printMessage(points: List<Point>, heigh: Int) {
             print(if (message[x][y]) "#" else " ")
         }
         println("")
-    }
-}
-
-private data class Point(var x: Int, var y: Int, val dx:Int, val dy: Int) {
-    fun move() {
-        x += dx
-        y += dy
-    }
-
-    fun revert() {
-        x -= dx
-        y -= dy
     }
 }

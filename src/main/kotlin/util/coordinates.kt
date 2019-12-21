@@ -3,7 +3,9 @@ package util
 import kotlin.math.abs
 import kotlin.math.sign
 
-data class Point(val x: Int, val y: Int)
+data class Point(val x: Int, val y: Int) {
+    fun move(v: Vector) = Point(x + v.dx, y + v.dy)
+}
 
 data class Vector(val dx: Int, val dy: Int) {
 
@@ -16,6 +18,8 @@ data class Vector(val dx: Int, val dy: Int) {
         }
         else return Vector(1 * dx.sign, 1 * dy.sign)
     }
+
+    operator fun unaryMinus() = Vector(-this.dx, -this.dy)
 }
 
 enum class Direction {
