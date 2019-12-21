@@ -1,6 +1,6 @@
-package aoc2018.day5
+package aoc2018
 
-import util.InputReader
+import util.*
 
 //
 // final lenght: 9900

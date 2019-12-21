@@ -1,4 +1,4 @@
-package aoc2018.day15
+package aoc2018
 
 import util.*
 
@@ -189,7 +189,7 @@ private data class Node(val p: Point, val parent: Node? = null) {
 }
 
 //
-// elfs and goblins
+// elves and goblins
 //
 private enum class Type { Goblin, Elf }
 

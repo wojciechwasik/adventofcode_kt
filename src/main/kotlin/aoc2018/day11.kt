@@ -1,4 +1,4 @@
-package aoc2018.day11
+package aoc2018
 
 //
 // X: 243, Y: 49

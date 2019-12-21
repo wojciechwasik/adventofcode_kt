@@ -1,4 +1,4 @@
-package aoc2018.day13
+package aoc2018
 
 import util.*
 
@@ -70,7 +70,7 @@ private fun toDirection(c: Char) = when (c) {
     'v' -> Direction.S
     '<' -> Direction.W
     '>' -> Direction.E
-    else -> throw IllegalArgumentException("direction symbol: $c")
+    else -> abort("direction symbol: $c")
 }
 
 private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
@@ -105,7 +105,7 @@ private fun moveCarts(tracks: Matrix<Char>, carts: List<Cart>): List<Cart> {
                     }
                 }
                 '+' -> cart.crossroads()
-                ' ' -> throw IllegalStateException("Cart $cart went out of tracks")
+                ' ' -> abort("Cart $cart went out of tracks")
             }
 
             // detect crash

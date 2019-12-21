@@ -1,7 +1,6 @@
-package aoc2018.day10
+package aoc2018
 
-import util.InputReader
-import util.parseInput
+import util.*
 
 //
 // RGRKHKNA
@@ -40,12 +39,12 @@ private fun problem(points: List<Point>) {
     println("time: $time")
 }
 
-private fun calculateHeight(points: List<Point>) = (points.maxBy { it.y }?.y ?: abort()) - (points.minBy { it.y }?.y ?: abort()) + 1
+private fun calculateHeight(points: List<Point>) = (points.maxBy { it.y }?.y ?: abort("This should never happen")) - (points.minBy { it.y }?.y ?: abort("This should never happen")) + 1
 
 private fun printMessage(points: List<Point>, heigh: Int) {
-    val minX = points.minBy { it.x }?.x ?: abort()
-    val length = (points.maxBy { it.x }?.x ?: abort()) - minX + 1
-    val minY = points.minBy { it.y }?.y ?: abort()
+    val minX = points.minBy { it.x }?.x ?: abort("This should never happen")
+    val length = (points.maxBy { it.x }?.x ?: abort("This should never happen")) - minX + 1
+    val minY = points.minBy { it.y }?.y ?: abort("This should never happen")
 
     val message = Array<Array<Boolean>>(length) { Array<Boolean>(heigh) { false } }
     points.forEach { message[it.x - minX][it.y - minY] = true }
@@ -57,8 +56,6 @@ private fun printMessage(points: List<Point>, heigh: Int) {
         println("")
     }
 }
-
-private fun abort(): Nothing = throw IllegalStateException("this should never happen")
 
 private data class Point(var x: Int, var y: Int, val dx:Int, val dy: Int) {
     fun move() {

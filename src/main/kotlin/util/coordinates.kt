@@ -9,7 +9,7 @@ data class Vector(val dx: Int, val dy: Int) {
 
     constructor(from: Point, to: Point): this(to.x - from.x, to.y - from.y)
 
-    fun getDirection():Vector {
+    fun getDirection(): Vector {
         if (dx != 0 && dy != 0) {
             val u = gcd(abs(dx), abs(dy))
             return Vector(dx / u, dy / u)

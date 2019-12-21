@@ -7,16 +7,17 @@ data class TreeNode<T>(val id: String, var value: T? = null) {
 
     var parent: TreeNode<T>? = null
         private set
-    private val children: MutableList<TreeNode<T>> = mutableListOf()
+    private val theChildren: MutableList<TreeNode<T>> = mutableListOf()
+    val children: List<TreeNode<T>> = theChildren
 
     fun addChild(child: TreeNode<T>): Unit {
-        children.add(child)
+        theChildren.add(child)
         child.parent = this
     }
 
     fun traverse(visitor: (TreeNode<T>) -> Unit): Unit {
         visitor(this)
-        children.forEach {
+        theChildren.forEach {
             it.traverse(visitor)
         }
     }

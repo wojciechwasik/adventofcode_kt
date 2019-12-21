@@ -1,7 +1,6 @@
-package aoc2018.day7
+package aoc2018
 
-import util.InputReader
-import util.parseInput
+import util.*
 
 //
 // order is: MNQKRSFWGXPZJCOTVYEBLAHIUD
@@ -24,12 +23,12 @@ fun main(args: Array<String>) {
     problem2(input)
 }
 
-private fun problem1(input: List<Link>): Unit {
+private fun problem1(input: List<Link>) {
     val stateMachine = StateMachine(input)
     val order = mutableListOf<Char>()
 
     while (stateMachine.hasRemainigTasks()) {
-        val task = stateMachine.findTaskToWorkOn() ?: throw IllegalStateException("Didn't get task, this should not happen here")
+        val task = stateMachine.findTaskToWorkOn() ?: abort("Didn't get task, this should not happen here")
         stateMachine.claimTask(task)
         // mark as done immediately as we only want to know the order here
         stateMachine.taskDone(task)
@@ -39,7 +38,7 @@ private fun problem1(input: List<Link>): Unit {
     println("order is: ${String(order.toCharArray())}")
 }
 
-private fun problem2(input: List<Link>): Unit {
+private fun problem2(input: List<Link>) {
     val stateMachine = StateMachine(input)
     val workers = WorkerTeam(5)
     var time = 0
@@ -52,14 +51,14 @@ private fun problem2(input: List<Link>): Unit {
             workers.doWork()
             time++
         }
-        val worker = workers.findIdle() ?: throw IllegalStateException("At least 1 worker should be idle")
+        val worker = workers.findIdle() ?: abort("At least 1 worker should be idle")
 
         // progress time until some task becomes doable
         while (stateMachine.findTaskToWorkOn() == null) {
             workers.doWork()
             time++
         }
-        val task = stateMachine.findTaskToWorkOn() ?: throw IllegalStateException("At least 1 task should be doable")
+        val task = stateMachine.findTaskToWorkOn() ?: abort("At least 1 task should be doable")
         stateMachine.claimTask(task)
         worker.workOn(task)
     }
@@ -111,14 +110,8 @@ private class StateMachine(links: List<Link>) {
 
 }
 
-
-
 private class WorkerTeam(size: Int) {
-    private val workers: List<Worker>
-
-    init {
-        workers = List<Worker>(size) { Worker() }
-    }
+    private val workers = List(size) { Worker() }
 
     fun findIdle() = workers.find { it.isIdle() }
 
@@ -131,7 +124,7 @@ private class Worker {
     private var task: Task? = null
 
     fun workOn(newTask: Task) {
-        if (!isIdle()) throw IllegalStateException("This worker is still busy")
+        if (!isIdle()) abort("This worker is still busy")
         task = newTask
     }
 

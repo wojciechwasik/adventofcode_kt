@@ -1,7 +1,6 @@
-package aoc2018.day12
+package aoc2018
 
-import util.InputReader
-import util.parseInput
+import util.*
 
 //
 // Result: 3798
@@ -33,7 +32,6 @@ private fun problem1(initialState: String, rules: List<Rule>, steps: Long) {
     println("Result: ${state.eval()}")
 }
 
-
 private fun problem2(initialState: String, rules: List<Rule>, steps: Long) {
     var state = State(initialState)
     var eval = state.eval()
@@ -53,7 +51,6 @@ private fun problem2(initialState: String, rules: List<Rule>, steps: Long) {
             println("[$i] 11th consecutive diff equal $diff, assuming stable solution")
             println("Final eval: ${newEval + (steps - i) * diff}")
             break
-            //3900000002212
         }
 
         eval = newEval

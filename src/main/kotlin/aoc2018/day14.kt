@@ -1,4 +1,4 @@
-package aoc2018.day14
+package aoc2018
 
 //
 // [6, 1, 2, 6, 4, 9, 1, 0, 2, 7]

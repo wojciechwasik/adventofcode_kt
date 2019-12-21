@@ -1,6 +1,6 @@
-package aoc2018.day9
+package aoc2018
 
-import util.parseInput
+import util.*
 import java.math.BigInteger
 
 //
@@ -24,7 +24,7 @@ private fun problem(input: Pair<Int, Int>) {
     val (count, limit) = input
 
     val players = Array<BigInteger>(count) { BigInteger.ZERO }
-    val board = Board()
+    val board = GameBoard()
 
     (1 .. limit).forEach {
         val score = board.put(it.toLong())
@@ -38,7 +38,7 @@ private fun problem(input: Pair<Int, Int>) {
     println("max score is: $result")
 }
 
-private class Board() {
+private class GameBoard() {
     private var current = Field(0)
 
     fun put(value: Long):Long {

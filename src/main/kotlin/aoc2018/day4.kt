@@ -1,7 +1,6 @@
-package aoc2018.day4
+package aoc2018
 
-import util.InputReader
-import util.parseInput
+import util.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
@@ -31,11 +30,11 @@ fun main(args: Array<String>) {
                 time[m] += 1
     }
 
-    strategy1(times)
-    strategy2(times)
+    problem1(times)
+    problem2(times)
 }
 
-private fun strategy1(times: MutableMap<String, IntArray>) {
+private fun problem1(times: MutableMap<String, IntArray>) {
     // strategy 1 - guard with most minutes slept, and his best minute
     val winner = times.entries.sortedBy { it.value.sum() }.last()
 
@@ -47,7 +46,7 @@ private fun strategy1(times: MutableMap<String, IntArray>) {
     println("result: ${id * minute}")
 }
 
-private fun strategy2(times: MutableMap<String, IntArray>) {
+private fun problem2(times: MutableMap<String, IntArray>) {
     // strategy 2 - guard with absolute best minute
     val winner = times.entries.sortedBy { bestMinuteValue(it.value) }.last()
 

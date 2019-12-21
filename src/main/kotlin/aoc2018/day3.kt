@@ -1,8 +1,6 @@
-package aoc2018.day3
+package aoc2018
 
-import util.InputReader
-import util.compareAll
-import util.parseInput
+import util.*
 
 //
 // overlap size: 110827
@@ -35,13 +33,13 @@ private val entryPattern = Regex("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)")
 
 private fun validator(values: List<String>) = values.size == 6
 
-private fun transformer(values: List<String>) = Field(
+private fun transformer(values: List<String>) = Area(
         values[1],
         values[2].toInt(), values[3].toInt(),
         values[2].toInt() + values[4].toInt() - 1, values[3].toInt() + values[5].toInt() - 1
 )
 
-private data class Field(val id: String, val left: Int, val top: Int, val right: Int, val bottom: Int) {
+private data class Area(val id: String, val left: Int, val top: Int, val right: Int, val bottom: Int) {
     fun contains(p: Point) = p.x >= left && p.x <= right && p.y >= top && p.y <= bottom
 
     fun forEach(f: (Point) -> Unit) {
@@ -50,5 +48,3 @@ private data class Field(val id: String, val left: Int, val top: Int, val right:
                 f(Point(x, y))
     }
 }
-
-private data class Point(val x: Int, val y: Int)
