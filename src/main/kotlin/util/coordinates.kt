@@ -48,3 +48,16 @@ enum class Direction {
     abstract fun turnLeft(): Direction
     abstract fun turnRight(): Direction
 }
+
+data class Area(val left: Int, val top: Int, val right: Int, val bottom: Int) {
+    constructor(topLeft: Point, bottomRight: Point): this(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
+
+    fun contains(p: Point) = p.x >= left && p.x <= right && p.y >= top && p.y <= bottom
+
+    fun forEach(consumer: (Point) -> Unit) {
+        for (y in top .. bottom)
+            for (x in left .. right)
+                consumer(Point(x, y))
+    }
+}
+
