@@ -1,9 +1,8 @@
 package util
 
 /**
- * Generate permutations using Heap's algorithm
+ * Generate permutations
  */
-
 fun <T> permutations(elements: List<T>): List<List<T>> {
     return generate(elements.size, elements)
 }

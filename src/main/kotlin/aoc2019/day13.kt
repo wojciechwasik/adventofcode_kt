@@ -27,17 +27,17 @@ private fun problem2(input: List<Long>) {
     val intcode = Intcode(input)
     intcode[0] = 2
 
-    var ballX = 0
-    var paddleX = 0
+    var ballX: Long
+    var paddleX: Long
     var output = intcode.run(listOf(0L)).windowed(3, 3)
     while (!intcode.isFinished()) {
-        ballX = output.find { it[2] == 4L }!![0].toInt()
-        paddleX = output.find { it[2] == 3L }!![0].toInt()
+        ballX = output.find { it[2] == 4L }!![0]
+        paddleX = output.find { it[2] == 3L }!![0]
 
         val move = ballX.compareTo(paddleX).sign.toLong()
 
         output = intcode.run(listOf(move)).windowed(3, 3)
     }
 
-    println("Final score is ${output.find { it[0] == -1L }!![2].toInt()}")
+    println("Final score is ${output.find { it[0] == -1L }!![2]}")
 }
