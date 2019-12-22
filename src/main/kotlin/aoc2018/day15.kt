@@ -24,44 +24,36 @@ private fun problem1(input: List<String>) {
         }
     }
 
+    val display = GridDisplay<Char>(board.xMax, board.yMax) { it }
     var tmp= round(board, units)
     board = tmp.first
     units = tmp.second
-    printBoard(board)
+    display.draw(board)
 
     round(board, units)
     board = tmp.first
     units = tmp.second
-    printBoard(board)
+    display.draw(board)
 
     round(board, units)
     board = tmp.first
     units = tmp.second
-    printBoard(board)
+    display.draw(board)
 
     round(board, units)
     board = tmp.first
     units = tmp.second
-    printBoard(board)
+    display.draw(board)
 
     round(board, units)
     board = tmp.first
     units = tmp.second
-    printBoard(board)
-
-    println("")
+    display.draw(board)
 }
 
 //private fun problem2(input: InputReader) {
 //    println("")
 //}
-
-private fun printBoard(board: Grid<Char>) {
-    for (y in 0 until board.yMax) {
-        for (x in 0 until board.xMax) print(board[x, y])
-        print('\n')
-    }
-}
 
 // round
 //   sort units, for each:

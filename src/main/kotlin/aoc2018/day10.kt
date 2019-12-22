@@ -48,13 +48,9 @@ private fun printMessage(points: List<Point>, heigh: Int) {
     val length = (points.maxBy { it.x }?.x ?: abort("This should never happen")) - minX + 1
     val minY = points.minBy { it.y }?.y ?: abort("This should never happen")
 
-    val message = Array<Array<Boolean>>(length) { Array<Boolean>(heigh) { false } }
-    points.forEach { message[it.x - minX][it.y - minY] = true }
+    val message = Grid(false, null, length, heigh)
+    points.forEach { message[it.x - minX, it.y - minY] = true }
 
-    for (y in 0 .. heigh - 1) {
-        for (x in 0..length - 1) {
-            print(if (message[x][y]) "#" else " ")
-        }
-        println("")
-    }
+    val display = GridDisplay<Boolean>(length, heigh) { if (it) '#' else ' ' }
+    display.draw(message)
 }

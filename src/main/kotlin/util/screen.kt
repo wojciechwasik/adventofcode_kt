@@ -47,6 +47,22 @@ class Screen(private val width: Int, private val height: Int) {
 }
 
 /**
+ * Display for grid data
+ */
+class GridDisplay<T>(private val width: Int, private val height: Int, private val mapper: (T) -> Char) {
+    private val screen = Screen(width, height)
+
+    /**
+     * Draw update from grid
+     * - input - grid to draw
+     */
+    fun draw(input: Grid<T>): Unit {
+        input.forEachIndexed() { x, y, v -> screen.update(x, y, mapper(v)) }
+        screen.draw()
+    }
+}
+
+/**
  * Display for sparse data (list of points with values)
  */
 class SparseDisplay<T>(private val width: Int, private val height: Int, private val mapper: (T) -> Char) {
